@@ -1,0 +1,8 @@
+{
+  "name": "B2Cmail",
+  "description": "B2Cmail - Hệ thống Email Marketing và Hộp thư Doanh nghiệp tích hợp AI, Brand Kit, Merge Tags, Chấm điểm Spam và Theo dõi Mở/Click thực tế.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

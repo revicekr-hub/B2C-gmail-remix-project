@@ -4,6 +4,62 @@
 
 ---
 
+## 1. 📋 Thông tin chung
+
+| Hạng mục | Nội dung |
+|---|---|
+| Tên đội thi | **PK Coding** |
+| Thành viên đội thi | 1. **Dương Quang Phúc** (MSSV: PH64240 — FPT Polytechnic · Khoa Kinh tế / Ngành Marketing & Sales / Lớp MS21202)[cite: 21]<br>2. **Phạm Chí Kiên** (MSSV: PH64302 — FPT Polytechnic · Khoa Kinh tế / Ngành Marketing & Sales / Lớp MS21202)[cite: 21] |
+| Bảng thi | **Bảng B - Kinh tế** |
+| Đề bài bốc thăm | **Đề số 06 — Trình tạo email marketing bằng AI** (Công cụ soạn email chiến dịch tự động) |
+| Demo online | https://ai.studio/apps/691935ad-6059-438e-a8f3-b63ede800bb8 *(Hoặc chạy trực tiếp từ source theo Mục 5)* |
+| Video demo (≤ 02 phút) | `<Điền URL link Google Drive / YouTube video demo 2 phút của đội trước khi nộp>` |
+| Source ZIP | Nộp trực tiếp gói mã nguồn ZIP trên hệ thống dự thi |
+| Minh chứng dùng AI | Xem trực tiếp tại **Mục 10** trong tệp README này |
+| Bảng kiểm thử | Xem trực tiếp tại **Mục 11** trong tệp README này (Gồm 06 ca kiểm thử thực tế) |
+
+---
+
+## 2. 🎯 Tính năng chính & Mô tả Bài toán
+
+Sản phẩm hoàn thành trọn vẹn 5 yêu cầu chức năng cốt lõi của Đề số 06 và tích hợp thêm bộ công cụ quản trị Email Marketing Doanh nghiệp:
+
+- **Tính năng 1 (Form nhập chiến dịch thông minh & Brand Kit):** Cho phép chọn nhanh *Mục tiêu chiến dịch* (`🚀 Ra mắt sản phẩm` / `🎁 Khuyến mãi` / `💎 Chăm sóc khách hàng`), nhập *Tên thương hiệu*, *Ngành hàng* và *Nội dung ưu đãi & thông điệp chính*. Hỗ trợ nút nạp nhanh kịch bản mẫu (Demo Preset) và lưu lịch sử chiến dịch.
+- **Tính năng 2 (AI phân tích và viết 03 mẫu email đa góc tiếp cận)[cite: 18]:** Tự động sinh đồng thời 03 mẫu email hoàn chỉnh theo 3 chiến lược tiếp thị (*Mẫu 1: Trực diện & Lợi ích cốt lõi; Mẫu 2: Kể chuyện & Khơi gợi cảm xúc; Mẫu 3: Khẩn cấp & Thúc đẩy chuyển đổi FOMO*). Mỗi mẫu gồm đầy đủ: Subject Line, Preheader, Nội dung (HTML & Text), Nút kêu gọi hành động (CTA) và cá nhân hóa động (`{{Ten_Khach_Hang}}`, `{{Ten_Cong_Ty}}`, `{{Ma_Uu_Dai}}`).
+- **Tính năng 3 (Khung Preview hiển thị như hộp thư Gmail thật)[cite: 18]:** Mô phỏng trực quan giao diện hộp thư đến và khung đọc thư chi tiết của Gmail (Desktop & Mobile), tích hợp công cụ kiểm tra độ an toàn hộp thư đến (Spam Score Audit) và quản lý/lưu/xoá lịch sử chiến dịch.
+- **Tính năng 4 (Nút Copy từng mẫu & "Viết lại theo tông khác")[cite: 18]:** Sao chép nhanh từng mẫu (Copy toàn bộ, Copy Subject, Copy mã HTML) hoặc xuất báo cáo; tích hợp thanh công cụ chuyển đổi tông giọng tức thì sang **Trang trọng (`formal`)**, **Hài hước (`witty`)**, **Khẩn cấp (`urgent`)**, hoặc **Chuyên nghiệp (`professional`)**.
+- **Tính năng 5 (AI gợi ý thời điểm gửi tốt nhất theo ngành hàng)[cite: 18]:** Phân tích hành vi khách hàng theo từng ngành hàng đã nhập để đề xuất **Ngày gửi vàng**, **Khung giờ mở thư cao nhất**, lý do tâm lý học hành vi và ước tính tỷ lệ Open Rate / CTR (phân biệt rõ ràng với số liệu mô phỏng Tracking thực tế).
+
+---
+
+## 3. 🛠️ Công nghệ sử dụng
+
+| Lớp | Công nghệ (ghi đúng phiên bản đã dùng) |
+|---|---|
+| Giao diện | **React** (`^19.0.1`) + **TypeScript** (`^7.0.2`) + **Tailwind CSS** (`^4.3.3`) |
+| Thư viện | `@google/genai` (`^2.4.0`), `lucide-react` (`^0.546.0`), `motion` (`^12.23.24`), `jspdf` (`^4.2.1`), `xlsx` (`^0.18.5`), `express` (`^4.21.2`) |
+| Lưu trữ | **localStorage** (lưu lịch sử chiến dịch và Brand Kit phía trình duyệt) kết hợp **In-memory Store** trên Express Proxy (phục vụ mô phỏng Tracking Pixel & Suppression List) |
+| Triển khai | **Vite** (`^8.3.0`) + **Node.js/Express (`tsx server.ts`)** / **Google AI Studio (Cloud Run)** |
+
+---
+
+## 4. 🤖 Tích hợp AI
+
+- **Chế độ đang dùng**: **API thật kết hợp Fallback thông minh (Hybrid Real AI + Transparent Mock Fallback)**
+  - **API thật**: Sử dụng Google Gemini API qua SDK `@google/genai` với cấu hình `responseSchema` (Structured Outputs) ép kiểu JSON chuẩn xác 100%[cite: 25].
+  - **Cơ chế Fallback minh bạch**: Khi chạy ở môi trường chấm bài không cấu hình khóa `GEMINI_API_KEY` hoặc mất kết nối mạng, hệ thống tự động chuyển mượt mà sang bộ sinh dữ liệu mô phỏng theo quy tắc nghiệp vụ (`generateFallbackCampaign`) và hiển thị rõ nhãn phân biệt giữa **"Dự báo bởi AI (Benchmark ngành)"** và **"Dữ liệu mô phỏng thực tế (Simulation)"**.
+- **Mục đích**: Phân tích mục tiêu chiến dịch, ngành hàng, ưu đãi của doanh nghiệp để biên soạn 03 mẫu email chuẩn cấu trúc AIDA/PAS, viết lại theo tông giọng yêu cầu, chấm điểm rủi ro Spam và gợi ý khung giờ gửi tối ưu.
+- **Bảo mật khoá API**: Tuyệt đối không ghi khoá API trong mã nguồn phía client. Khóa được đặt trong tệp `.env` (đã chặn trong `.gitignore`) và chỉ gọi qua backend proxy `server.ts`[cite: 31].
+
+Biến môi trường (cấu hình trong tệp `.env` dựa trên `.env.example`):
+
+```env
+GEMINI_API_KEY=<khoá_gemini_api_của_bạn>
+APP_URL=http://localhost:3000
+**B2Cmail** là nền tảng khởi tạo, cá nhân hóa, kiểm định độ an toàn hộp thư đến (Deliverability Audit) và mô phỏng chiến dịch Email Marketing bằng Trí tuệ Nhân tạo (AI), được thiết kế như một không gian làm việc chuẩn doanh nghiệp (Enterprise Email Marketing Suite).
+
+---
+
 ## 1. 🎯 Mô tả Bài toán & Giá trị Thực tiễn
 
 ### Thực trạng bài toán
@@ -136,5 +192,7 @@ Bạn có thể bấm nút **"📖 Hướng dẫn sử dụng & Kịch bản Dem
 - Tại dải **"🧪 Dữ liệu Mô phỏng Thực tế (Live Tracking Sandbox)"** ngay bên dưới khung Preview:
   1. Bấm **`🚀 Chạy Gửi Mô Phỏng`** để gọi API `POST /api/campaign/send-simulation` (trộn biến Merge Tags và nhúng Tracking Pixel 1x1 GIF).
   2. Bấm **`+ Mở thư (Open Pixel)`**, **`+ Click CTA`**, và **`+ Unsubscribe`** để kiểm chứng các bộ đếm sự kiện thực tế tăng lên theo thời gian thực.
-#   B 2 C - g m a i l - r e m i x - p r o j e c t  
+#   B 2 C - r e m i x - g m a i l - p r o j e c t  
+ #   B 2 C - r e m i x - g m a i l - p r o j e c t  
+ #   B 2 C - r e m i x - g m a i l - p r o j e c t  
  
